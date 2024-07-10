@@ -1,0 +1,20 @@
+{
+  "name": "roman-numerals-converter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint src --ext .js",
+    "test": "jest --coverage"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.22.5",
+    "@babel/plugin-transform-modules-commonjs": "^7.22.5",
+    "eslint": "^8.42.0",
+    "eslint-webpack-plugin": "^4.0.1",
+    "jest": "^29.7.0"
+  }
+}
