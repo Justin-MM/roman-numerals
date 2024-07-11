@@ -1,18 +1,3 @@
-export const convertToRomanNumeral = (num) => {
-    if (isNaN(num) || num < 1 || num > 3999)
-        return "invalid input";
-    const digits = String(+num).split("");
-    const key = ["", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM",
-        "", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC",
-        "", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"];
-
-    let roman = "";
-    let i = 3;
-    while (i--)
-        roman = (key[+digits.pop() + (i * 10)] || "") + roman;
-    return Array(+digits.join("") + 1).join("M") + roman;
-}
-
 // recursive approach
 const romanMatrix = [
     [1000, 'M'],
@@ -30,6 +15,22 @@ const romanMatrix = [
     [1, 'I']
 ];
 
+export const convertToRomanNumeral = (num) => {
+    if (isNaN(num) || num < 1 || num > 3999)
+        return "invalid input";
+
+    const roman = romanMatrix.reduce((currentValue, element) => {
+        let newVal = currentValue;
+        while (num >= element[0]) {
+            newVal = newVal.concat(element[1]);
+            num -= element[0];
+        }
+        return newVal;
+    }, ""); 
+
+    return roman;
+}
+
 export const recursiveConvertToRoman = (num) => {
     if (isNaN(num) || num < 1 || num > 3999)
         return "invalid input";
@@ -41,7 +42,7 @@ const recursiveConvertToRomanHelper = (num) => {
     if (num === 0) {
         return '';
     }
-    for (var i = 0; i < romanMatrix.length; i++) {
+    for (let i = 0; i < romanMatrix.length; i++) {
         if (num >= romanMatrix[i][0]) {
             return romanMatrix[i][1] + recursiveConvertToRomanHelper(num - romanMatrix[i][0]);
         }
